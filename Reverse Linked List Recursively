@@ -1,0 +1,94 @@
+#include<iostream>
+using namespace std;
+
+struct node
+{
+    int data;
+    node *next;
+};
+node *head=NULL;
+node* getnode()
+{
+    int data1;
+    node* newnode=new node;
+    cout<<"Enter data : ";
+    cin>>data1;
+    newnode->data=data1;
+    newnode->next=NULL;
+}
+
+//Create Slinked lidt
+
+void createlist(int n)
+{
+    node *newnode,*temp;
+    for(int i=0;i<n;i++)
+    {
+    newnode=getnode();
+    temp=head;
+    if(head==NULL)
+    {
+        head=newnode;
+    }
+    else{
+    while(temp->next!=NULL)
+    {
+
+    temp=temp->next;
+    }
+    temp->next=newnode;
+    }
+    }
+    cout<<"Elements are Inserted Successfully. "<<endl;
+}
+
+void display(node *head)
+{
+   node *temp;
+   temp=head;
+   if(head==NULL)
+   {
+       cout<<"Linklist is Empty "<<endl;
+   }
+   else
+   {
+       cout<<"Linked List Elements Are : "<<endl;
+       while(temp!=NULL)
+       {
+           cout<<temp->data<<" -> ";
+           temp=temp->next;
+       }
+       cout<<endl;
+
+   }
+}
+ node* reverse(node *head)
+   {
+       node *newhead;
+       if(head==NULL || head->next==NULL)
+       {
+           return head;
+       }
+        newhead=reverse(head->next);
+        head->next->next=head;
+        head->next=NULL;
+
+       return newhead;
+
+   }
+
+
+   int main()
+   {
+
+       int n;
+       cout<<"Enter no. of node ";
+       cin>>n;
+       createlist( n);
+       display(head);
+            cout<<"After Reverse ";
+           
+        display(reverse(head));
+
+
+   }
